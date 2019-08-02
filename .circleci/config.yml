@@ -22,7 +22,7 @@ jobs:
       - run:
           command: |
             sudo pip install pipenv
-            pipenv sync --dev
+            make requirements
 
       - save_cache:
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
@@ -31,4 +31,4 @@ jobs:
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
 
-      - run: make test-quality
+      - run: pipenv run make test-quality
