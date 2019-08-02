@@ -25,10 +25,10 @@ venv: ## Activates the virtual env
 	pipenv shell
 
 requirements: ## Activates the virtual env
-	pipenv install
+	pipenv install --dev
 
 test-quality: ## Test code quality
-	pylint -j 0 .
+	pylint .
 	pycodestyle . --show-source
 	isort --check-only --recursive --diff .
 
@@ -37,3 +37,6 @@ clean: ## Remove Python file artifacts
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 	find . -name '__pycache__' -exec rm -fr {} +
+
+server: ## Start the server
+	python app.py
