@@ -30,7 +30,7 @@ requirements: ## Activates the virtual env
 test-quality: ## Test code quality
 	pylint . --rcfile=pylintrc
 	pycodestyle . --config=.pycodestyle --show-source
-	isort --check-only --recursive --diff .
+	isort --check-only --recursive .
 
 clean: ## Remove Python file artifacts
 	find . -name '*.pyc' -exec rm -f {} +
@@ -40,3 +40,6 @@ clean: ## Remove Python file artifacts
 
 server: ## Start the server
 	python app.py
+
+update_db: ## Updates db
+	python update_db.py
