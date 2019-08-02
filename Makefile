@@ -28,8 +28,8 @@ requirements: ## Activates the virtual env
 	pipenv install --dev
 
 test-quality: ## Test code quality
-	pylint .
-	pycodestyle . --show-source
+	pylint . --rcfile=pylintrc
+	pycodestyle . --config=.pycodestyle --show-source
 	isort --check-only --recursive --diff .
 
 clean: ## Remove Python file artifacts
