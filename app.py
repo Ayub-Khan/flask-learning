@@ -27,6 +27,7 @@ encrptor = Fernet(ENCRYPTION_KEY)
 
 @auth.verify_password
 def verify_password(username, password):
+    """ verify password for authentication """
     user = User.query.filter_by(username=username).first()
     if not user or not user.verify_password(password):
         return False
@@ -48,6 +49,7 @@ class User(db.Model):
         return '<User %r>' % self.username
 
     def verify_password(self, password):
+        """ check if password is same """
         return self.password == password
 
 
@@ -62,6 +64,7 @@ class UserSchema(marshmallow.Schema):
         fields = ('first_name', 'last_name', 'username', 'password', 'email')
 
     def _encrypt_dict_data(self, single_user_data):
+        """ Encrypt and return user dict. """
         if not ENABLE_ENCRIPTION:
             return single_user_data
         encrypted_dict = {}
@@ -73,6 +76,7 @@ class UserSchema(marshmallow.Schema):
 
     @post_dump(pass_many=True)
     def wrap(self, data, many, **kwargs):
+        """ If encryption is enabled encrypt data after dump. """
         if many:
             encrypted_data = []
             for user in data:
